@@ -1,0 +1,52 @@
+ 0  public String piglatinator()
+ 0  {
+ 4  int ifVowel, ifPunct;
+ 4  String modNextTag, start, end;
+ 0  
+ 4  nextTag = getNextTag();                 //retrieves the next tag in the input String
+ 4  start = "";
+ 4  end = "";
+ 0  
+ 4  while (!nextTag.equals(""))
+ 4  {
+ 8  ifVowel = findVowels();             //where is the first vowel
+ 8  ifPunct = findPunct();              //is the tag punctuation
+ 0  
+ 8  if (ifPunct == 1 && nextTag.length() == 1) //if the tag is punctuation, just add directly to output w/out modifications
+ 8  {
+12  output += nextTag;              
+ 8  }
+ 8  else 
+ 8  {
+12  if ((ifVowel == -1)) //if there is no vowels, add "ay" and then add to output
+12  {
+16  modNextTag = nextTag + "ay";
+16  output += modNextTag;
+12  }
+12  else
+12  {
+16  if (ifVowel == 1) //if the first letter is a vowel, add "yay" and then add to output
+16  {
+20  modNextTag = nextTag + "yay";
+20  output += modNextTag;
+16  }
+16  else //move characters up until the first vowel to the end, add "ay", then add to the output String
+16  {
+20  start = nextTag.substring(0,ifVowel - 1);
+20  end = nextTag.substring(ifVowel - 1);
+20  if (start.charAt(0) >= 'A' && start.charAt(0) <= 'Z') //tests to see if tag begins with a capital letter
+24  end = capFirst(end);
+20  modNextTag = end + start.toLowerCase() + "ay";
+20  output += modNextTag;
+16  }
+12  }
+ 8  }
+ 8  
+ 8  nextTag = getNextTag();             //refreshes nextTag
+ 8  start = "";                         //clears start String
+ 8  end = "";                           //clears end String
+ 4  }
+ 0  
+ 4  return output;                          //returns the whole translated line of text
+ 0  
+ 0  }
